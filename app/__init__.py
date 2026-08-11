@@ -1,0 +1,13 @@
+from flask import Flask
+
+
+def criar_app():
+    app = Flask(__name__)
+    
+    app.config.from_object("config.Config")
+
+    @app.route("/")
+    def inicio():
+        return "Showcase funcionando!"
+
+    return app
