@@ -1,5 +1,14 @@
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
 class Config:
-    SECRET_KEY = "chave-secreta-do-showcase"
-    DEBUG = True
+    SECRET_KEY = os.getenv("SECRET_KEY")
+    DEBUG = os.getenv("DEBUG") == "True"
+    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
+        
+        
+        
+        
+        
