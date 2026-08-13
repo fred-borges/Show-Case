@@ -11,6 +11,8 @@ def criar_app():
 
     db.init_app(app)
     migrate.init_app(app, db)
+    from .models.users import User
+    from .models.projects import Project
 
     @app.route("/")
     def inicio():
