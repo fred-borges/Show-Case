@@ -1,7 +1,10 @@
+from typing import TYPE_CHECKING
 from ..extensions import db
 import sqlalchemy as sa
 import sqlalchemy.orm as so
 
+if TYPE_CHECKING:
+    from .projects import Project
 
 class User(db.Model):
     __tablename__ = "users"
@@ -10,4 +13,4 @@ class User(db.Model):
     name: so.Mapped[str] = so.mapped_column(sa.String(64), index=True, unique=True)
     email: so.Mapped[str] = so.mapped_column(sa.String(120), index=True, unique=True)
     password_hash: so.Mapped[str] = so.mapped_column(sa.String(256))
-
+    projects: so.Mapped[list["Project"]] = so.relationship(back_populates="user")
