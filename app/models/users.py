@@ -1,4 +1,5 @@
 from typing import TYPE_CHECKING
+import flask_login
 from ..extensions import db
 import sqlalchemy as sa
 import sqlalchemy.orm as so
@@ -6,7 +7,7 @@ import sqlalchemy.orm as so
 if TYPE_CHECKING:
     from .projects import Project
 
-class User(db.Model):
+class User(db.Model, flask_login.UserMixin):
     __tablename__ = "users"
     
     id: so.Mapped[int] = so.mapped_column(primary_key=True)

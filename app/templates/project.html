@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Post</title>
+</head>
+
+<body>
+
+    <h1>Post</h1>
+
+    <form method="POST">
+
+        <input type="text" name="name" placeholder="Name" required>
+
+        <textarea type="text" name="description" placeholder="Description" required></textarea>
+
+        <textarea type="text" name="markdown" placeholder="Markdown" ></textarea>
+
+        <input type="text" name="github_url" placeholder="Url do GitHub" required>
+
+        <input type="text" name="demo_url" placeholder="Url demo do projeto" required>
+
+        <button type="submit">
+            Post
+        </button>
+
+        <p><a href="{{ url_for('projects.user_projects', id=current_user.id) }}">Ver projetos</a></p>
+
+    </form>
+
+</body>
+
+</html>
