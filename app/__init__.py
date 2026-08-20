@@ -26,7 +26,6 @@ def criar_app():
     app.register_blueprint(post_bp)
 
     @app.route("/")
-    @login_required
     def inicio():
         return render_template("home.html")
 

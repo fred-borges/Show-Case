@@ -1,34 +1,115 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
-    <title>Post</title>
-</head>
 
-<body>
+{% block content %}
 
-    <h1>Post</h1>
 
-    <form method="POST">
+    <!-- Conteúdo -->
+    <main class="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-10">
 
-        <input type="text" name="name" placeholder="Name" required>
+        <!-- Título -->
+        <div class="mb-8">
 
-        <textarea type="text" name="description" placeholder="Description" required></textarea>
+            <p class="mb-2 text-sm font-medium text-blue-600">
+                Showcase
+            </p>
 
-        <textarea type="text" name="markdown" placeholder="Markdown" ></textarea>
+            <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">
+                Criar projeto
+            </h1>
 
-        <input type="text" name="github_url" placeholder="Url do GitHub" required>
+            <p class="mt-2 text-sm leading-6 text-slate-600 sm:text-base">
+                Apresenta o teu projeto e partilha-o com outras pessoas.
+            </p>
 
-        <input type="text" name="demo_url" placeholder="Url demo do projeto" required>
+        </div>
 
-        <button type="submit">
-            Post
-        </button>
 
-        <p><a href="{{ url_for('projects.user_projects', id=current_user.id) }}">Ver projetos</a></p>
+        <!-- Formulário -->
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
 
-    </form>
+            <form method="POST" class="space-y-6">
 
-</body>
+                <!-- Nome -->
+                <div>
+                    <label for="name" class="mb-2 block text-sm font-semibold text-slate-700">
+                        Nome do projeto
+                    </label>
 
-</html>
+                    <input type="text" name="name" id="name" placeholder="Ex: Sistema de gestão de tarefas" required
+                        class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+                </div>
+
+
+                <!-- Descrição -->
+                <div>
+                    <label for="description" class="mb-2 block text-sm font-semibold text-slate-700">
+                        Descrição
+                    </label>
+
+                    <textarea name="description" id="description" rows="5"
+                        placeholder="Explica brevemente o que o teu projeto faz..." required
+                        class="w-full resize-y rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"></textarea>
+                </div>
+
+
+                <!-- Markdown -->
+                <div>
+                    <label for="markdown" class="mb-2 block text-sm font-semibold text-slate-700">
+                        Markdown
+                    </label>
+
+                    <textarea name="markdown" id="markdown" rows="8"
+                        placeholder="# Sobre o projeto&#10;&#10;Escreve aqui a documentação..."
+                        class="w-full resize-y rounded-lg border border-slate-300 px-4 py-3 font-mono text-sm outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"></textarea>
+
+                    <p class="mt-2 text-xs text-slate-500">
+                        Podes utilizar Markdown para apresentar a documentação do projeto.
+                    </p>
+                </div>
+
+
+                <!-- GitHub -->
+                <div>
+                    <label for="github_url" class="mb-2 block text-sm font-semibold text-slate-700">
+                        URL do GitHub
+                    </label>
+
+                    <input type="url" name="github_url" id="github_url" placeholder="https://github.com/..." required
+                        class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+                </div>
+
+
+                <!-- Demo -->
+                <div>
+                    <label for="demo_url" class="mb-2 block text-sm font-semibold text-slate-700">
+                        URL da Demo
+                    </label>
+
+                    <input type="url" name="demo_url" id="demo_url" placeholder="https://meuprojeto.com" required
+                        class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+                </div>
+
+
+                <!-- Ações -->
+                <div class="flex flex-col-reverse gap-3 border-t border-slate-100 pt-6 sm:flex-row sm:justify-end">
+
+                    <a href="{{ url_for('projects.user_projects', id=current_user.id) }}"
+                        class="rounded-lg border border-slate-200 px-5 py-3 text-center text-sm font-semibold text-slate-700 transition hover:bg-slate-50">
+                        Cancelar
+                    </a>
+
+                    <button type="submit"
+                        class="rounded-lg bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-300 focus:ring-offset-2">
+                        Publicar projeto
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+{% endblock %}

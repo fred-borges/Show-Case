@@ -1,22 +1,147 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    {% if current_user.is_authenticated %}
-        <h1>Olá {{ current_user.name }}</h1>
-    {% else %}
-        <p><a href="{{ url_for('user.login') }}">Login</a></p>
-    {% endif %}
+{% extends "base.html" %}
 
-    <nav>
-        <ul>
-            <li><a href="{{ url_for('inicio') }}">Inicio</a></li>
-            <li><a href="{{ url_for('projects.project') }}">Posts</a></li>
-        </ul>
-    </nav>
-</body>
-</html>
+
+{% block content %}
+
+
+    <!-- Conteúdo -->
+    <main>
+
+        <!-- Hero -->
+        <section class="border-b border-slate-200 bg-white">
+
+            <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+
+                {% if current_user.is_authenticated %}
+
+                <div class="max-w-3xl">
+
+                    <span class="inline-block rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600">
+                        Bem-vindo ao ShowCase
+                    </span>
+
+                    <h1 class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl">
+                        Olá, {{ current_user.name }} 👋
+                    </h1>
+
+                    <p class="mt-5 text-base leading-7 text-slate-600 sm:text-lg">
+                        Mostra os teus projetos, partilha o teu trabalho
+                        e constrói o teu portefólio.
+                    </p>
+
+                    <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+
+                        <a href="{{ url_for('projects.project') }}"
+                            class="rounded-lg bg-slate-900 px-5 py-3 text-center text-sm font-semibold text-white transition hover:bg-slate-700">
+                            Publicar projeto
+                        </a>
+
+                        <a href="{{ url_for('projects.user_projects', id=current_user.id) }}"
+                            class="rounded-lg border border-slate-200 bg-white px-5 py-3 text-center text-sm font-semibold text-slate-700 transition hover:bg-slate-50">
+                            Ver meus projetos
+                        </a>
+
+                    </div>
+
+                </div>
+
+                {% else %}
+
+                <div class="max-w-3xl">
+
+                    <span class="inline-block rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600">
+                        ShowCase
+                    </span>
+
+                    <h1 class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl">
+                        Mostra o que sabes fazer.
+                    </h1>
+
+                    <p class="mt-5 text-base leading-7 text-slate-600 sm:text-lg">
+                        Publica os teus projetos, partilha o teu trabalho
+                        e apresenta as tuas habilidades.
+                    </p>
+
+                    <div class="mt-8">
+
+                        <a href="{{ url_for('user.login') }}"
+                            class="inline-block rounded-lg bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-700">
+                            Entrar
+                        </a>
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+
+        <!-- Área de destaque -->
+        <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+
+            <div class="grid gap-6 md:grid-cols-3">
+
+                <!-- Card -->
+                <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+
+                    <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 text-xl">
+                        🚀
+                    </div>
+
+                    <h2 class="mt-5 text-lg font-bold">
+                        Publica projetos
+                    </h2>
+
+                    <p class="mt-2 text-sm leading-6 text-slate-600">
+                        Apresenta os teus projetos e partilha o que estás a construir.
+                    </p>
+
+                </div>
+
+
+                <!-- Card -->
+                <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+
+                    <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 text-xl">
+                        💻
+                    </div>
+
+                    <h2 class="mt-5 text-lg font-bold">
+                        Mostra o teu código
+                    </h2>
+
+                    <p class="mt-2 text-sm leading-6 text-slate-600">
+                        Adiciona o teu GitHub, demo e documentação através de Markdown.
+                    </p>
+
+                </div>
+
+
+                <!-- Card -->
+                <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+
+                    <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 text-xl">
+                        🌐
+                    </div>
+
+                    <h2 class="mt-5 text-lg font-bold">
+                        Cria o teu Showcase
+                    </h2>
+
+                    <p class="mt-2 text-sm leading-6 text-slate-600">
+                        Constrói aos poucos um espaço para apresentar o teu trabalho.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+{% endblock %}

@@ -1,29 +1,90 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
-    <title>Login</title>
-</head>
 
-<body>
+{% block content %}
 
-    <h1>Login</h1>
+    <main class="flex min-h-screen items-center justify-center px-4 py-10">
 
-    <form method="POST">
+        <div class="w-full max-w-md">
 
-        <input type="email" name="email" placeholder="Email">
+            <!-- Logo -->
+            <div class="mb-8 text-center">
 
-        <input type="password" name="password" placeholder="Password">
+                <a href="{{ url_for('inicio') }}" class="text-2xl font-bold tracking-tight">
+                    ShowCase
+                </a>
 
-        <button type="submit">
-            Entrar
-        </button>
+                <h1 class="mt-6 text-3xl font-bold tracking-tight">
+                    Bem-vindo de volta
+                </h1>
 
-        <p>Não tem conta?</p>
-        <a href="{{ url_for('user.register') }}">Register</a>
+                <p class="mt-2 text-sm text-slate-600">
+                    Entra na tua conta para continuar.
+                </p>
 
-    </form>
+            </div>
 
-</body>
 
-</html>
+            <!-- Formulário -->
+            <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+
+                <form method="POST" class="space-y-5">
+
+                    <!-- Email -->
+                    <div>
+
+                        <label for="email" class="mb-2 block text-sm font-semibold text-slate-700">
+                            Email
+                        </label>
+
+                        <input type="email" name="email" id="email" placeholder="exemplo@email.com" required
+                            autocomplete="email"
+                            class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+
+                    </div>
+
+
+                    <!-- Password -->
+                    <div>
+
+                        <label for="password" class="mb-2 block text-sm font-semibold text-slate-700">
+                            Password
+                        </label>
+
+                        <input type="password" name="password" id="password" placeholder="••••••••" required
+                            autocomplete="current-password"
+                            class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+
+                    </div>
+
+
+                    <!-- Botão -->
+                    <button type="submit"
+                        class="w-full rounded-lg bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-300 focus:ring-offset-2">
+                        Entrar
+                    </button>
+
+                </form>
+
+
+                <!-- Registo -->
+                <div class="mt-6 border-t border-slate-100 pt-6 text-center">
+
+                    <p class="text-sm text-slate-600">
+                        Ainda não tens uma conta?
+                    </p>
+
+                    <a href="{{ url_for('user.register') }}"
+                        class="mt-2 inline-block text-sm font-semibold text-blue-600 transition hover:text-blue-800">
+                        Criar conta
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+{% endblock %}

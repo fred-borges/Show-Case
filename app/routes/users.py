@@ -5,7 +5,6 @@ from flask_login import login_required, login_user, logout_user
 from werkzeug.security import check_password_hash, generate_password_hash
 from ..extensions import db, login_manager
 from ..models.users import User
-from flask_login import  login_required
 
 user_bp = Blueprint("user", __name__, url_prefix="/user") #Criando uma Blueprint(Agrupamnento de rotas)
 
@@ -29,7 +28,7 @@ def login():
             user.password_hash,
             password # Caso não encontrar o User ou password estiver incorreto ele retorna um erro
         ):
-            return "Email ou password inválidos", 404
+            return "Email ou password inválidos"
 
         login_user(user) # Caso encontrar o User e o password estiver correto o usuário vai estar logado e redirecionado para a página home
 
@@ -49,7 +48,7 @@ def register():
         )
         
         if user:# Caso encontrado retorna essa mensagem
-            return "Usuário já está catrado"
+            return "Usuário já está catrado", 401
         
 
         user = User(name = name, email = email, password_hash = generate_password_hash(password))# Caso estiver tudo certo registra no banco de dados
