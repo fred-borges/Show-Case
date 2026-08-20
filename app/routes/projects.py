@@ -35,3 +35,68 @@ def user_projects(id: int):
     ).all()
 
     return render_template("user_projects.html", projects=projects)
+
+@post_bp.route("/<id>/edit", methods=["GET", "POST"])
+def edit_project(id):
+
+    # 1. Procurar o projeto
+    project = db.session.scalar(
+        sa.select(Project).where(Project.id == id)
+    )
+
+    # 2. Verificar se o projeto existe
+    if project is None:
+        return "Projeto não encontrado", 404
+
+    # 3. Verificar se o projeto pertence ao utilizador
+    if project.user_id != current_user.id:
+        return "Acesso recusado", 403
+
+    # 4. Se for POST, atualizar o projeto
+    if request.method == "POST":
+        project.name = request.form["name"]
+        project.description = request.form["description"]
+        project.markdown = request.form["markdown"]
+        project.github_url = request.form["github_url"]
+        project.demo_url = request.form["demo_url"]
+
+        # 5. Guardar alterações
+        db.session.commit()
+
+        # 6. Voltar para os projetos
+        return redirect(
+            url_for("projects.user_projects", id=current_user.id)
+        )
+
+    # 7. Se for GET, mostrar formulário preenchido
+    return render_template(
+        "edit_project.html",
+        project=project
+    )
+    
+@post_bp.route("/<int:id>/delete", methods=["GET", "POST"])
+def delete_project(id):
+
+    project = db.session.scalar(
+        sa.select(Project).where(Project.id == id)
+    )
+
+    if project is None:
+        return "Projeto não encontrado", 404
+
+    if project.user_id != current_user.id:
+        return "Acesso recusado", 403
+
+    if request.method == "POST":
+
+        db.session.delete(project)
+        db.session.commit()
+
+        return redirect(
+            url_for("projects.user_projects", id=current_user.id)
+        )
+
+    return render_template(
+        "delete_project.html",
+        project=project
+    )

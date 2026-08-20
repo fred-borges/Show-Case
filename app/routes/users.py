@@ -29,7 +29,7 @@ def login():
             user.password_hash,
             password # Caso não encontrar o User ou password estiver incorreto ele retorna um erro
         ):
-            return "Email ou password inválidos"
+            return "Email ou password inválidos", 404
 
         login_user(user) # Caso encontrar o User e o password estiver correto o usuário vai estar logado e redirecionado para a página home
 

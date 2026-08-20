@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Excluir projeto</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+    <div class="min-h-screen flex items-center justify-center px-4">
+
+        <div class="w-full max-w-md bg-white rounded-2xl shadow-lg p-8 text-center">
+
+            <!-- Ícone -->
+            <div class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-red-100">
+
+                <svg class="h-8 w-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M9 7V4a1 1 0 011-1h4a1 1 0 011 1v3m-9 0h14" />
+                </svg>
+
+            </div>
+
+            <h1 class="text-2xl font-bold text-gray-900">
+                Excluir projeto?
+            </h1>
+
+            <p class="mt-3 text-gray-600">
+                Tem certeza que deseja excluir
+                <span class="font-semibold text-gray-900">
+                    {{ project.name }}
+                </span>?
+            </p>
+
+            <p class="mt-2 text-sm text-gray-500">
+                Esta ação não pode ser desfeita.
+            </p>
+
+            <!-- Botões -->
+            <div class="mt-8 flex flex-col-reverse gap-3 sm:flex-row sm:justify-center">
+
+                <a href="{{ url_for('projects.user_projects', id=current_user.id) }}"
+                    class="w-full rounded-lg border border-gray-300 px-5 py-3 font-medium text-gray-700 transition hover:bg-gray-100 sm:w-auto">
+                    Cancelar
+                </a>
+
+                <form action="{{ url_for('projects.delete_project', id=project.id) }}" method="POST"
+                    class="w-full sm:w-auto">
+
+                    <button type="submit"
+                        class="w-full rounded-lg bg-red-600 px-5 py-3 font-medium text-white transition hover:bg-red-700 sm:w-auto">
+                        Sim, excluir
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
